@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Your Blue Love 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Comic Neue', cursive;
+}
+
+body{
+  background:linear-gradient(#000,#0a1a2f);
+  min-height:100vh;
+  text-align:center;
+  overflow:hidden;
+  padding-top:30px;
+  color:white;
+}
+
+h1{
+  color:#1e90ff;
+  margin-bottom:10px;
+}
+
+#loveCounter{
+  color:#1e90ff;
+  font-size:18px;
+  margin-bottom:15px;
+}
+
+.bubble{
+  background:rgba(30,144,255,0.2);
+  display:inline-block;
+  padding:10px 20px;
+  border-radius:20px;
+  margin:8px;
+  color:#7fc8ff;
+  font-size:15px;
+}
+
+.card{
+  background:rgba(255,255,255,0.1);
+  width:85%;
+  max-width:520px;
+  margin:25px auto;
+  padding:25px;
+  border-radius:20px;
+  color:#e0f0ff;
+  line-height:1.7;
+  box-shadow:0 10px 30px rgba(30,144,255,.3);
+  border:1px solid rgba(30,144,255,.3);
+}
+
+/* الزر الصغير */
+.secretBtn{
+  margin-top:25px;
+  padding:10px 25px;
+  border-radius:25px;
+  border:1px solid #7fc8ff;
+  background:transparent;
+  color:#7fc8ff;
+  font-size:15px;
+  box-shadow:0 0 10px #1e90ff;
+  cursor:pointer;
+}
+
+#secret{
+  display:none;
+  margin-top:15px;
+  color:#7fc8ff;
+  font-size:16px;
+}
+
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+</style>
+</head>
+<body>
+
+<h1>Your Blue Love 💙</h1>
+<div id="loveCounter">My love for you: 0%</div>
+
+<div style="font-size:70px">💙</div>
+
+<div class="bubble">You are my favorite person 💙</div><br>
+<div class="bubble">You make my world brighter ✨</div><br>
+<div class="bubble">My heart beats only for you 💞</div>
+
+<div class="card">
+<b>To my beautiful Mariam,</b><br><br>
+From the first moment you came into my life, everything changed.  
+You became my happiness, my peace, and my safest place.  
+Your smile is my favorite view in the whole world,  
+and your voice is my favorite sound.  
+I don't need a perfect life, I just need you in it.  
+I promise to love you today, tomorrow, and forever.  
+No matter the distance, no matter the time,  
+my heart will always belong to you 💙<br><br>
+<b>Forever yours,</b><br>
+Your Valentine 💌
+</div>
+
+<button class="secretBtn" onclick="showSecret()">💌 Tap for a secret message</button>
+
+<div id="secret">
+Mariam… you are not just my love,  
+you are my destiny, my home, and my forever 💙
+</div>
+
+<script>
+// عدّاد الحب
+let love = 0;
+setInterval(()=>{
+  if(love < 100){
+    love++;
+    document.getElementById("loveCounter").innerText =
+      "My love for you: " + love + "%";
+  }else{
+    document.getElementById("loveCounter").innerText =
+      "My love for you: ∞% 💙";
+  }
+},100);
+
+// قلوب زرقاء
+function createHeart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💙";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(2+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+}
+setInterval(createHeart,70);
+
+// رسالة سرية
+function showSecret(){
+  document.getElementById("secret").style.display="block";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Comic Neue', cursive;
+}
+
+body{
+  background:linear-gradient(-45deg,#2b000f,#5c001f,#ff4d6d,#ff8fab);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+}
+
+/* خلفية I LOVE YOU */
+body::before{
+  content:"I LOVE YOU I LOVE YOU I LOVE YOU I LOVE YOU I LOVE YOU I LOVE YOU";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  font-size:40px;
+  color:rgba(255,255,255,0.05);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* حركة الخلفية */
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.screen{
+  text-align:center;
+  z-index:2;
+}
+
+h1{
+  font-size:22px;
+  margin-bottom:20px;
+  color:#ffd6e0;
+  text-shadow:0 0 10px #ff4d6d;
+}
+
+.buttons{
+  display:flex;
+  gap:40px;
+  position:relative;
+}
+
+button{
+  padding:10px 26px;
+  border-radius:30px;
+  border:none;
+  font-size:14px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+#yesBtn{
+  background:#ff4d6d;
+  color:white;
+  box-shadow:0 4px 0 #c9184a;
+}
+
+#noBtn{
+  background:#ffb3c1;
+  color:#7a001f;
+  box-shadow:0 4px 0 #ff758f;
+  position:relative;
+}
+
+/* اهتزاز */
+@keyframes shake {
+  0%{transform:translate(0)}
+  25%{transform:translate(5px)}
+  50%{transform:translate(-5px)}
+  75%{transform:translate(5px)}
+  100%{transform:translate(0)}
+}
+.shake{
+  animation:shake 0.3s;
+}
+
+/* قلوب المطر + من الزر */
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:16px;
+  animation:fall linear infinite;
+  opacity:.8;
+  pointer-events:none;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+</style>
+</head>
+<body>
+
+<div class="screen">
+  <h1 id="question">Will you be my Valentine?</h1>
+  <div class="buttons">
+    <button id="yesBtn" onclick="goLove()">Yes of course ❤️</button>
+    <button id="noBtn">No thank you 🙄</button>
+  </div>
+</div>
+
+<script>
+// مطر قلوب
+function createHeart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(2+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+}
+setInterval(createHeart,90);
+
+// NO يهرب + يهز + YES يكبر
+let scale = 1;
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+function moveNoForever(){
+  const x = Math.random()*300 - 150;
+  const y = Math.random()*200 - 100;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+  scale += 0.15;
+  yesBtn.style.transform = `scale(${scale})`;
+
+  document.body.classList.add("shake");
+  setTimeout(()=>document.body.classList.remove("shake"),300);
+}
+
+noBtn.addEventListener("mouseover", moveNoForever);
+noBtn.addEventListener("touchstart", moveNoForever);
+
+// قلوب من زر YES
+yesBtn.addEventListener("mouseover", ()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  const rect=yesBtn.getBoundingClientRect();
+  h.style.left=rect.left+rect.width/2+"px";
+  h.style.top=rect.top+"px";
+  h.style.animationDuration="2s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),2000);
+});
+
+// النص يتغير
+const texts=[
+ "Will you be my Valentine?",
+ "Please say yes… 🥺",
+ "My heart is waiting 💓",
+ "Don't break my heart 😢",
+ "Just press YES ❤️"
+];
+let i=0;
+setInterval(()=>{
+  i=(i+1)%texts.length;
+  document.getElementById("question").innerText=texts[i];
+},4000);
+
+// عند YES (تقدر بعدين تضيف شاشة النهاية)
+function goLove(){
+ alert("You just made my heart the happiest ❤️");
+}function goLove(){
+  window.location.href = "love.html";
+}
+</script>
+
+</body>
+</html>
